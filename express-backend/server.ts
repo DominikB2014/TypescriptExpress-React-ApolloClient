@@ -1,8 +1,9 @@
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
+import schema from './schema';
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 
 app.get('/', (req,res) => {
@@ -12,10 +13,10 @@ app.get('/', (req,res) => {
 })
 
 app.use('/graphql', graphqlHTTP({
-    schema: undefined,
+    schema,
     graphiql: true
 }))
 
 app.listen(port, () => {
-    console.log('server has started');
+    console.log(`server has started on ${port}`);
 })
